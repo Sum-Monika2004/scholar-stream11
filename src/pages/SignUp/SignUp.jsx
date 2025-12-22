@@ -56,7 +56,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-[96vh] flex items-center justify-center bg-gradient-to-br from-[#2D4024] via-[#49554A] to-[#36454F] relative overflow-hidden">
+    <div className="min-h-[96vh] flex items-center justify-center bg-gradient-to-b from-blue-300 to-blue-950 relative overflow-hidden">
       <div>
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
           <div className="max-w-lg text-center lg:text-left">

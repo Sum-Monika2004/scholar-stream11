@@ -86,14 +86,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-20px)] items-center justify-center bg-gradient-to-br from-[#5C353B] via-[#745660] to-[#4B4A48] relative overflow-hidden">
+    <div className="border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all min-h-[calc(100vh-20px)] items-center justify-center  relative overflow-hidden">
       <div className="">
-        <div className="relative z-10 mx-auto w-11/12 gap-10 p-6 lg:p-10 text-white flex justify-center items-center">
+        <div className="relative z-10 mx-auto w-11/12 gap-10 p-6 lg:p-10  flex justify-center items-center">
           {/* Login card */}
 
           <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8">
             <form onSubmit={handleSignin} className="space-y-5">
-              <h2 className="text-2xl font-semibold mb-2 text-center text-white">
+              <h2 className="text-2xl font-semibold mb-2 text-center ">
                 Log in
               </h2>
 
@@ -104,7 +104,7 @@ const Login = () => {
                   name="email"
                   ref={emailRef}
                   placeholder="example@email.com"
-                  className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="input input-bordered w-full bg-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
 
@@ -113,7 +113,7 @@ const Login = () => {
                 <input
                   name="password"
                   placeholder="••••••••"
-                  className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="input input-bordered w-full bg-white/20  focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
                 <span
                   onClick={() => setShow(!show)}
@@ -137,9 +137,9 @@ const Login = () => {
 
               {/* Divider */}
               <div className="flex items-center justify-center gap-2 my-2">
-                <div className="h-px w-16 bg-white/30"></div>
-                <span className="text-sm text-white/70">or</span>
-                <div className="h-px w-16 bg-white/30"></div>
+                <div className="h-px w-16 bg-gray-500"></div>
+                <span className="text-sm ">or</span>
+                <div className="h-px w-16 bg-gray-500"></div>
               </div>
 
               {/* Google Signin */}
@@ -156,11 +156,11 @@ const Login = () => {
                 Continue with Google
               </button>
 
-              <p className="text-center text-sm text-white/80 mt-3">
+              <p className="text-center text-sm  mt-3">
                 Don't have an account?{" "}
                 <Link
                   to="/signUp"
-                  className="text-pink-300 hover:text-white underline"
+                  className="text-pink-300 hover:text-blue-400 underline"
                 >
                   Sign up
                 </Link>

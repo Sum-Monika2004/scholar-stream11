@@ -2,7 +2,8 @@ import React, { use } from "react";
 import { AuthContext } from "../../../providers/AuthContext";
 import { Link, NavLink } from "react-router";
 import logoImg from "../../../assets/logo.png";
-import { RiseLoader } from "react-spinners";
+import { BounceLoader } from "react-spinners";
+import { CgMenuMotion } from "react-icons/cg";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -32,14 +33,6 @@ const Navbar = () => {
         <NavLink to="/all-scholarships">
           <li className="m-2 text-[18px] font-semibold">Scholarships</li>
         </NavLink>
-
-        {user ? (
-          <NavLink to="/profile">
-            <li className="m-2 text-[18px] font-semibold">Profile</li>
-          </NavLink>
-        ) : (
-          ""
-        )}
       </nav>
     </>
   );
@@ -86,31 +79,37 @@ const Navbar = () => {
         </div>
         <div className="navbar-end gap-5 font-semibold text-[18px]">
           {loading ? (
-            <RiseLoader color="#4f754b" />
+            <BounceLoader color="#062a87" size={35} />
           ) : user ? (
             <div className="text-center space-y-3">
               <button
+                className="flex items-center justify-between gap-1 bg-blue-200 p-1 rounded-full cursor-pointer mt-2 hover:bg-gray-200"
                 popoverTarget="popover-1"
                 style={{ anchorName: "--anchor-1" }}
               >
+                <CgMenuMotion />
                 <img
                   src={user?.photoURL || "https://via.placeholder.com/88"}
-                  className="h-[45px] w-[45px] object-cover rounded-full mx-auto mt-3"
+                  className="h-[35px] w-[35px] object-cover rounded-full mx-auto "
                   alt=""
                 />
               </button>
 
               <div
-                className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm py-3 space-y-2"
+                className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm py-3 space-y-2 flex items-start text-[18px]"
                 popover="auto"
                 id="popover-1"
                 style={{ positionAnchor: "--anchor-1" }}
               >
-                <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-                <p className="text-gray-400">{user?.email}</p>
+                <Link
+                  to={"/dashboard"}
+                  className="hover:text-blue-900  hover:text-[16px]"
+                >
+                  Dashboard
+                </Link>
                 <button
                   onClick={handleSignOut}
-                  className="bg-blue-700 text-white btn w-full"
+                  className="cursor-pointer hover:text-[16px] hover:text-blue-900"
                 >
                   Sign Out
                 </button>

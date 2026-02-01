@@ -25,13 +25,13 @@ const SignUp = () => {
     const email = e.target.email?.value;
     const password = e.target.password?.value;
 
-    const regExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    const regExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{6,}).*$/;
 
     console.log(regExp.test(password));
 
     if (!regExp.test(password)) {
       toast.error(
-        "Password must be at least 6 characters, including uppercase and lowercase letters"
+        "Password must be at least 6 characters, including capital letter and special character",
       );
       return;
     }

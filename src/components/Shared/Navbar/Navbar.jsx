@@ -37,7 +37,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="shadow-md bg-blue-200">
+    <div className="shadow-md bg-blue-200 sticky top-0 z-50 ">
       <div className="navbar mx-auto w-11/12">
         <div className="navbar-start ">
           <div className="dropdown">
@@ -83,7 +83,7 @@ const Navbar = () => {
           ) : user ? (
             <div className="text-center space-y-3">
               <button
-                className="flex items-center justify-between gap-1 bg-blue-200 p-1 rounded-full cursor-pointer mt-2 hover:bg-gray-200"
+                className="flex items-center justify-between gap-1 bg-blue-200 p-1 rounded-full cursor-pointer hover:bg-gray-200"
                 popoverTarget="popover-1"
                 style={{ anchorName: "--anchor-1" }}
               >

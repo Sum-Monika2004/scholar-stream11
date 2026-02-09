@@ -4,6 +4,7 @@ import hero from "../../assets/hero.jpg";
 import { Link, useLoaderData } from "react-router";
 import Scholarship from "../../components/Scholarship/Scholarship";
 import SuccessStories from "../../components/SuccessStories/SuccessStories";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Home = () => {
   const data = useLoaderData();
@@ -32,8 +33,12 @@ const Home = () => {
             step toward your dream university.
           </p>
           <Link to="/all-scholarships">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg transform hover:scale-105 cursor-pointer">
-              Search Scholarship
+            <button className="bg-red-600  text-white px-8 py-4 rounded-sm font-semibold transition-all shadow-md transform hover:scale-105 cursor-pointer flex gap-2 items-center mx-auto">
+              <span>Search Scholarship</span>
+
+              <span className="mt-0.5">
+                <FaArrowRightLong />
+              </span>
             </button>
           </Link>
         </motion.div>

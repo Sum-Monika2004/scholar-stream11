@@ -1,12 +1,19 @@
 import React, { use, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../providers/AuthContext";
+import ReviewsSection from "./ReviewsSection";
 
 const ScholarshipDetails = () => {
   const [singleS, setSingleS] = useState({});
+  const [reviews, setReviews] = useState([]);
+
   const { user } = use(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const addNewReview = (newReview) => {
+    setReviews((prev) => [newReview, ...prev]);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/all-scholarships/${id}`, {
@@ -18,7 +25,13 @@ const ScholarshipDetails = () => {
       .then((data) => {
         setSingleS(data.result);
       });
-  }, []);
+  }, [id, user]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/reviews/${id}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data));
+  }, [id]);
 
   return (
     <div className="max-w-11/12 mx-auto p-4 md:p-6 lg:p-8">
@@ -137,6 +150,15 @@ const ScholarshipDetails = () => {
             </button>
           </Link>
         </div>
+      </div>
+      {/* Reviews Section */}
+      <div>
+        <ReviewsSection
+          reviews={reviews}
+          singleS={singleS}
+          scholarshipId={singleS._id}
+          onAddReview={addNewReview}
+        />
       </div>
     </div>
   );

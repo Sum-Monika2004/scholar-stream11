@@ -16,6 +16,7 @@ import Payment from "../components/Payment/Payment";
 import PaymentSuccess from "../components/Payment/PaymentSuccess";
 import PaymentFailed from "../components/Payment/PaymentFailed";
 import Analytics from "../pages/Dashboard/Admin/Analytics";
+import Reviews from "../pages/Dashboard/Moderator/Reviews";
 
 export const router = createBrowserRouter([
   {
@@ -104,10 +105,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "manage-orders",
-      //   element: <ManageOrders />,
-      // },
+      {
+        path: "/dashboard/reviews",
+        element: <Reviews></Reviews>,
+      },
     ],
   },
 ]);

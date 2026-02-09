@@ -46,7 +46,7 @@ const Scholarship = (s) => {
               </div>
               <div className="">
                 <Link to={`/scholarshipsDetails/${singleS._id}`}>
-                  <button className="btn text-nowrap bg-blue-900 hover:opacity-85  text-white font-semibold  w-full">
+                  <button className="btn text-nowrap  bg-blue-900 hover:opacity-85  text-white font-semibold  w-full">
                     View Details
                   </button>
                 </Link>

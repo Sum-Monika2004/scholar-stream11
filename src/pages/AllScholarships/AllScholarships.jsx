@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import Scholarship from "../../components/Scholarship/Scholarship";
 
@@ -6,9 +6,12 @@ const AllScholarships = () => {
   const data = useLoaderData();
   console.log(data);
 
-  const [loading, setLoading] = useState(true);
-  const [scholarships, setScholarships] = useState(data);
-  console.log();
+  const [loading, setLoading] = useState(false);
+  const [scholarships, setScholarships] = useState(data.result);
+  const [total, setTotal] = useState(data.total);
+  const [country, setCountry] = useState("");
+  const [category, setCategory] = useState("");
+  const [page, setPage] = useState(1);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -23,6 +26,36 @@ const AllScholarships = () => {
         setLoading(false);
       });
   };
+
+  const applyFilter = () => {
+    setLoading(true);
+
+    fetch(
+      `http://localhost:3000/all-scholarships?country=${country}&category=${category}`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setScholarships(data.result);
+        setTotal(data.total);
+        setLoading(false);
+      });
+  };
+
+  const handleSort = (value) => {
+    fetch(`http://localhost:3000/all-scholarships?sort=${value}`)
+      .then((res) => res.json())
+      .then((data) => setScholarships(data.result));
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/all-scholarships?page=${page}&limit=6`)
+      .then((res) => res.json())
+      .then((data) => {
+        setScholarships(data.result);
+        setTotal(data.total);
+      });
+  }, [page]);
+
   return (
     <div>
       <h1 className="font-bold text-5xl text-center my-15">All Scholarships</h1>
@@ -50,10 +83,53 @@ const AllScholarships = () => {
           </svg>
           <input name="search" type="search" placeholder="Search" />
         </label>
-        <button className="btn bg-blue-800 hover:bg-blue-700 text-white rounded-full">
+        <button className="btn bg-blue-900 hover:bg-blue-800 text-white rounded-full">
           {loading ? "Searching...." : "Search"}
         </button>
       </form>
+
+      {/* Filter & Sort Section */}
+      <div className="flex flex-wrap gap-4 justify-center mb-8">
+        {/* Country Filter */}
+        <select
+          className="select select-bordered"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        >
+          <option value="">All Countries</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+          <option value="Canada">Canada</option>
+        </select>
+
+        {/* Category Filter */}
+        <select
+          className="select select-bordered"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">All Categories</option>
+          <option>Science</option>
+          <option>Engineering</option>
+          <option>Business</option>
+        </select>
+
+        {/*Filter*/}
+        <button onClick={applyFilter} className="btn btn-outline">
+          Apply Filter
+        </button>
+
+        {/* Sort */}
+        <select
+          className="select select-bordered"
+          onChange={(e) => handleSort(e.target.value)}
+        >
+          <option value="">Sort By</option>
+          <option value="feesAsc">Fees: Low → High</option>
+          <option value="feesDesc">Fees: High → Low</option>
+          <option value="dateDesc">Newest</option>
+        </select>
+      </div>
 
       <div className="w-11/12 mx-auto my-20">
         {/* cards */}
@@ -65,6 +141,19 @@ const AllScholarships = () => {
               <Scholarship key={s._id} s={s}></Scholarship>
             ))}
           </Suspense>
+        </div>
+
+        {/* pagination */}
+        <div className="flex justify-center gap-2 mt-10">
+          {[...Array(Math.ceil(total / 6)).keys()].map((num) => (
+            <button
+              key={num}
+              className={`btn ${page === num + 1 ? "btn-primary" : ""}`}
+              onClick={() => setPage(num + 1)}
+            >
+              {num + 1}
+            </button>
+          ))}
         </div>
       </div>
     </div>

@@ -4,14 +4,11 @@ import Scholarship from "../../components/Scholarship/Scholarship";
 
 const AllScholarships = () => {
   const data = useLoaderData();
-  console.log(data);
 
   const [loading, setLoading] = useState(false);
-  const [scholarships, setScholarships] = useState(data.result);
-  const [total, setTotal] = useState(data.total);
+  const [scholarships, setScholarships] = useState(data);
   const [country, setCountry] = useState("");
   const [category, setCategory] = useState("");
-  const [page, setPage] = useState(1);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -19,7 +16,7 @@ const AllScholarships = () => {
 
     setLoading(true);
 
-    fetch(`http://localhost:3000/search?search=${search_text}`)
+    fetch(`http://localhost:3000/all-scholarships?search=${search_text}`)
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data);
@@ -28,33 +25,22 @@ const AllScholarships = () => {
   };
 
   const applyFilter = () => {
-    setLoading(true);
-
     fetch(
-      `http://localhost:3000/all-scholarships?country=${country}&category=${category}`,
+      `http://localhost:3000/filter?country=${country}&category=${category}`,
     )
       .then((res) => res.json())
       .then((data) => {
-        setScholarships(data.result);
-        setTotal(data.total);
-        setLoading(false);
+        setScholarships(data);
       });
   };
 
-  const handleSort = (value) => {
-    fetch(`http://localhost:3000/all-scholarships?sort=${value}`)
-      .then((res) => res.json())
-      .then((data) => setScholarships(data.result));
-  };
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/all-scholarships?page=${page}&limit=6`)
+  const handleSort = (order) => {
+    fetch(`http://localhost:3000/sort?sort=${order}`)
       .then((res) => res.json())
       .then((data) => {
-        setScholarships(data.result);
-        setTotal(data.total);
+        setScholarships(data);
       });
-  }, [page]);
+  };
 
   return (
     <div>
@@ -124,10 +110,9 @@ const AllScholarships = () => {
           className="select select-bordered"
           onChange={(e) => handleSort(e.target.value)}
         >
-          <option value="">Sort By</option>
-          <option value="feesAsc">Fees: Low → High</option>
-          <option value="feesDesc">Fees: High → Low</option>
-          <option value="dateDesc">Newest</option>
+          <option value="">Sort by Fees</option>
+          <option value="asc">Lowest</option>
+          <option value="desc">Highest</option>
         </select>
       </div>
 
@@ -144,17 +129,17 @@ const AllScholarships = () => {
         </div>
 
         {/* pagination */}
-        <div className="flex justify-center gap-2 mt-10">
+        {/* <div className="flex justify-center gap-2 mt-10">
           {[...Array(Math.ceil(total / 6)).keys()].map((num) => (
             <button
               key={num}
               className={`btn ${page === num + 1 ? "btn-primary" : ""}`}
-              onClick={() => setPage(num + 1)}
+              // onClick={() => setPage(num + 1)}
             >
               {num + 1}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

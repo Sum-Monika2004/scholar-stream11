@@ -1,12 +1,22 @@
-import React from "react";
-import { Link, useLocation } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router";
 import successImg from "../../assets/success.png";
 
 const PaymentSuccess = () => {
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("session_id");
 
-  // Optional data passed from checkout
-  const { scholarshipName, universityName, amount } = location.state || {};
+  const [s, setS] = useState({});
+
+  useEffect(() => {
+    {
+      fetch(`http://localhost:3000/payment-success/${sessionId}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setS(result);
+        });
+    }
+  }, [sessionId]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
@@ -28,13 +38,13 @@ const PaymentSuccess = () => {
 
           <div className="text-left space-y-2">
             <p>
-              <strong>Scholarship:</strong> {scholarshipName || "N/A"}
+              <strong>Scholarship:</strong> {s.scholarshipName || "N/A"}
             </p>
             <p>
-              <strong>University:</strong> {universityName || "N/A"}
+              <strong>University:</strong> {s.universityName || "N/A"}
             </p>
             <p>
-              <strong>Amount Paid:</strong> ${amount || "0"}
+              <strong>Amount Paid:</strong> ${s.amount || "0"}
             </p>
           </div>
 

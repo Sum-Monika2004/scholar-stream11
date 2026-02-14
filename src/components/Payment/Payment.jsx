@@ -19,110 +19,83 @@ const Payment = () => {
       .then((data) => {
         setSingleS(data.result);
       });
-  }, []);
+  }, [id, user]);
 
   const totalAmount =
-    singleS.tuitionFees + singleS.applicationFees + singleS.serviceCharge;
+    (singleS?.tuitionFees || 0) +
+    (singleS?.applicationFees || 0) +
+    (singleS?.serviceCharge || 0);
 
-  const handlePayment = (e) => {
-    e.preventDefault();
-    toast("Payment Successful! Application Submitted.");
-    navigate("/payment-success", {
-      state: {
-        scholarshipName: singleS.scholarshipName,
-        universityName: singleS.universityName,
-        amount: totalAmount,
+  const paymentInfo = {
+    scholarshipId: singleS._id,
+    universityName: singleS.universityName,
+    scholarshipName: singleS.scholarshipName,
+    userEmail: user.email,
+    tuitionFees: singleS.tuitionFees,
+    applicationFees: singleS.applicationFees,
+    serviceCharge: singleS.serviceCharge,
+  };
+
+  const handlePayment = async () => {
+    // if (!id || !user) return;
+    fetch("http://localhost:3000/create-payment-session", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${user.accessToken}`,
       },
-    });
+      body: JSON.stringify(paymentInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.url) {
+          toast("Payment initialization failed");
+          return;
+        }
+        window.location.href = data.url;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6">
-        Scholarship Application Payment
-      </h2>
+    <div className="mx-auto w-8/12 p-4 md:p-6 lg:p-8">
+      <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden p-5">
+        <div className="">
+          <h2 className="text-2xl font-bold mb-4">Checkout</h2>
+          <p>
+            <b>Scholarship:</b> {singleS.scholarshipName}
+          </p>
+          <p>
+            <b>University:</b> {singleS.universityName}
+          </p>
+          <p className="">
+            <b> Tuition Fees:</b>{" "}
+            <span className="font-semibold text-gray-500">
+              $ {singleS.tuitionFees}
+            </span>
+          </p>
+          <p className="">
+            <b>Application Fees:</b>{" "}
+            <span className="font-semibold text-gray-500">
+              $ {singleS.applicationFees}
+            </span>
+          </p>
+          <p className="">
+            <b>Service Charges:</b>{" "}
+            <span className="font-semibold text-gray-500">
+              $ {singleS.serviceCharge}
+            </span>
+          </p>
+          <p className="text-2xl mt-2">Total: ${totalAmount}</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Scholarship Summary */}
-        <div className="card bg-base-100 shadow">
-          <div className="card-body">
-            <h3 className="card-title">Scholarship Summary</h3>
-            <p>
-              <strong>Scholarship:</strong> {singleS.scholarshipName}
-            </p>
-            <p>
-              <strong>University:</strong> {singleS.universityName}
-            </p>
-            <p>
-              <strong>tuition Fee:</strong> ${singleS.tuitionFees}
-            </p>
-            <p>
-              <strong>Application Fee:</strong> ${singleS.applicationFees}
-            </p>
-            <p>
-              <strong>Service Charge:</strong> ${singleS.serviceCharge}
-            </p>
-
-            <div className="divider"></div>
-
-            <p className="text-xl font-bold">Total: ${totalAmount}</p>
-          </div>
-        </div>
-
-        {/* Payment Form */}
-        <div className="card bg-base-100 shadow">
-          <div className="card-body">
-            <h3 className="card-title">Payment Details</h3>
-
-            <form onSubmit={handlePayment} className="space-y-4">
-              <div>
-                <label className="label">Card Holder Name</label>
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="label">Card Number</label>
-                <input
-                  type="text"
-                  className="input input-bordered w-full"
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="label">Expiry Date</label>
-                  <input
-                    type="text"
-                    className="input input-bordered w-full"
-                    placeholder="MM/YY"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="label">CVV</label>
-                  <input
-                    type="password"
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn bg-green-500 text-white hover:opacity-75 w-full"
-              >
-                Pay & Apply
-              </button>
-            </form>
-          </div>
+          <button
+            onClick={handlePayment}
+            className="btn bg-green-500 text-white w-full mt-4 hover:opacity-85"
+          >
+            Pay Now
+          </button>
         </div>
       </div>
     </div>

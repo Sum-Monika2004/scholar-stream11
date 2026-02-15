@@ -11,7 +11,7 @@ const ManageSch = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/all-scholarships")
+    fetch("https://scholar-stream-server-gules.vercel.app/all-scholarships")
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data);
@@ -30,12 +30,15 @@ const ManageSch = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/all-scholarships/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
+        fetch(
+          `https://scholar-stream-server-gules.vercel.app/all-scholarships/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        })
+        )
           .then((res) => res.json())
           .then((data) => {
             const remaining = scholarships.filter((s) => s._id !== id);

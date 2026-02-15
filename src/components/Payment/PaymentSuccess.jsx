@@ -12,7 +12,9 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     {
-      fetch(`http://localhost:3000/payment-success/${sessionId}`)
+      fetch(
+        `https://scholar-stream-server-gules.vercel.app/payment-success/${sessionId}`,
+      )
         .then((res) => res.json())
         .then((result) => {
           setS(result);
@@ -25,7 +27,7 @@ const PaymentSuccess = () => {
     const sessionId = params.get("session_id");
 
     if (sessionId) {
-      fetch("http://localhost:3000/verify-payment", {
+      fetch("https://scholar-stream-server-gules.vercel.app/verify-payment", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ sessionId }),

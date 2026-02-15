@@ -29,12 +29,18 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/recommended-sch"),
+        loader: () =>
+          fetch(
+            "https://scholar-stream-server-gules.vercel.app/recommended-sch",
+          ),
       },
       {
         path: "/all-scholarships",
         element: <AllScholarships></AllScholarships>,
-        loader: () => fetch("http://localhost:3000/all-scholarships"),
+        loader: () =>
+          fetch(
+            "https://scholar-stream-server-gules.vercel.app/all-scholarships",
+          ),
       },
       {
         path: "/scholarshipsDetails/:id",

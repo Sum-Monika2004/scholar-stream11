@@ -5,7 +5,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/reviews")
+    fetch("https://scholar-stream-server-gules.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
@@ -21,7 +21,7 @@ const Reviews = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/reviews/${id}`, {
+        fetch(`https://scholar-stream-server-gules.vercel.app/reviews/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

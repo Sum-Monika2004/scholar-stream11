@@ -16,7 +16,9 @@ const AllScholarships = () => {
 
     setLoading(true);
 
-    fetch(`http://localhost:3000/all-scholarships?search=${search_text}`)
+    fetch(
+      `https://scholar-stream-server-gules.vercel.app/all-scholarships?search=${search_text}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data);
@@ -26,7 +28,7 @@ const AllScholarships = () => {
 
   const applyFilter = () => {
     fetch(
-      `http://localhost:3000/filter?country=${country}&category=${category}`,
+      `https://scholar-stream-server-gules.vercel.app/filter?country=${country}&category=${category}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -35,7 +37,7 @@ const AllScholarships = () => {
   };
 
   const handleSort = (order) => {
-    fetch(`http://localhost:3000/sort?sort=${order}`)
+    fetch(`https://scholar-stream-server-gules.vercel.app/sort?sort=${order}`)
       .then((res) => res.json())
       .then((data) => {
         setScholarships(data);

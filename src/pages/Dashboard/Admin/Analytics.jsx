@@ -18,7 +18,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // 🔹 Fetch overall stats
-    fetch("http://localhost:3000/admin-stats", {
+    fetch("https://scholar-stream-server-gules.vercel.app/admin-stats", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("access-token")}`,
       },
@@ -27,7 +27,7 @@ const Analytics = () => {
       .then((data) => setStats(data));
 
     // 🔹 Fetch application analytics
-    fetch("http://localhost:3000/application-stats", {
+    fetch("https://scholar-stream-server-gules.vercel.app/application-stats", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("access-token")}`,
       },

@@ -5,7 +5,7 @@ const ManageApplications = () => {
   const [app, setApp] = useState([]);
   const { user } = use(AuthContext);
   useEffect(() => {
-    fetch("http://localhost:3000/applications")
+    fetch("https://scholar-stream-server-gules.vercel.app/applications")
       .then((res) => res.json())
       .then((data) => {
         setApp(data);
@@ -13,27 +13,33 @@ const ManageApplications = () => {
   }, []);
 
   const handleStatusUpdate = async (id, status) => {
-    await fetch(`http://localhost:3000/applications/status/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${user.accessToken}`,
+    await fetch(
+      `https://scholar-stream-server-gules.vercel.app/applications/status/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify({ status }),
       },
-      body: JSON.stringify({ status }),
-    });
+    );
 
     refetch();
   };
 
   const handleFeedback = async (id, feedback) => {
-    await fetch(`http://localhost:3000/applications/feedback/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${user.accessToken}`,
+    await fetch(
+      `https://scholar-stream-server-gules.vercel.app/applications/feedback/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify({ feedback }),
       },
-      body: JSON.stringify({ feedback }),
-    });
+    );
 
     refetch();
   };

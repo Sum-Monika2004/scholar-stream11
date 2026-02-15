@@ -28,7 +28,7 @@ const ReviewForm = ({ scholarshipId, singleS, onAddReview }) => {
       reviewComment: comment,
     };
 
-    fetch("http://localhost:3000/reviews", {
+    fetch("https://scholar-stream-server-gules.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

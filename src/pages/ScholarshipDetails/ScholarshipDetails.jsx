@@ -16,11 +16,14 @@ const ScholarshipDetails = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/all-scholarships/${id}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
+    fetch(
+      `https://scholar-stream-server-gules.vercel.app/all-scholarships/${id}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
       },
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         setSingleS(data.result);
@@ -28,7 +31,7 @@ const ScholarshipDetails = () => {
   }, [id, user]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/reviews/${id}`)
+    fetch(`https://scholar-stream-server-gules.vercel.app/reviews/${id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [id]);

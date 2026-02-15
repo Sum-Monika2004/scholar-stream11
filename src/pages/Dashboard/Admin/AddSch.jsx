@@ -40,7 +40,7 @@ const AddSch = () => {
     setLoading(false);
     // form.reset();
 
-    fetch("http://localhost:3000/all-scholarships", {
+    fetch("https://scholar-stream-server-gules.vercel.app/all-scholarships", {
       method: "POST",
       headers: {
         "content-type": "application/json",

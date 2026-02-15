@@ -10,11 +10,14 @@ const Payment = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/all-scholarships/${id}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
+    fetch(
+      `https://scholar-stream-server-gules.vercel.app/all-scholarships/${id}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
       },
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         setSingleS(data.result);
@@ -38,14 +41,17 @@ const Payment = () => {
 
   const handlePayment = async () => {
     // if (!id || !user) return;
-    fetch("http://localhost:3000/create-payment-session", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${user.accessToken}`,
+    fetch(
+      "https://scholar-stream-server-gules.vercel.app/create-payment-session",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(paymentInfo),
       },
-      body: JSON.stringify(paymentInfo),
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         if (!data.url) {

@@ -17,6 +17,8 @@ import PaymentSuccess from "../components/Payment/PaymentSuccess";
 import PaymentFailed from "../components/Payment/PaymentFailed";
 import Analytics from "../pages/Dashboard/Admin/Analytics";
 import Reviews from "../pages/Dashboard/Moderator/Reviews";
+import ManageApplications from "../pages/Dashboard/Moderator/ManageApplications";
+import MyApplications from "../pages/Dashboard/Student/MyApplications";
 
 export const router = createBrowserRouter([
   {
@@ -108,6 +110,22 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/reviews",
         element: <Reviews></Reviews>,
+      },
+      {
+        path: "/dashboard/manage-applications",
+        element: (
+          <PrivateRoute>
+            <ManageApplications></ManageApplications>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-applications",
+        element: (
+          <PrivateRoute>
+            <MyApplications></MyApplications>
+          </PrivateRoute>
+        ),
       },
     ],
   },

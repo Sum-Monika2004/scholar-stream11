@@ -18,6 +18,19 @@ const PaymentFailed = () => {
     }
   }, [sessionId]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+
+    if (sessionId) {
+      fetch("http://localhost:3000/verify-payment", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">

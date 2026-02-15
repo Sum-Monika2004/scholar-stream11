@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import successImg from "../../assets/success.png";
+import { toast } from "react-toastify";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const [s, setS] = useState({});
 
   useEffect(() => {
@@ -17,6 +19,23 @@ const PaymentSuccess = () => {
         });
     }
   }, [sessionId]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+
+    if (sessionId) {
+      fetch("http://localhost:3000/verify-payment", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast("Application saved:", data);
+        });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">

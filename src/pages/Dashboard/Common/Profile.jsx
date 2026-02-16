@@ -23,7 +23,7 @@ const Profile = () => {
           </a>
 
           <p className="p-2 px-4 text-[14px] font-semibold text-blue-400  border-2 border-blue-400 rounded-full mt-2">
-            Customer
+            Student
           </p>
           <p className="mt-2 text-xl font-medium text-gray-800 ">
             User Id: {user?.uid}

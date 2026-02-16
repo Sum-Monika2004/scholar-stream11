@@ -39,7 +39,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-blue-200 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
@@ -47,11 +47,14 @@ const Sidebar = () => {
           {/* Top Content */}
           <div>
             {/* Logo */}
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
-              <Link to="/" className="text-center">
+            <Link to="/" className="text-center h-10 w-10">
+              <div className="w-full hidden md:flex px-4 py-2 rounded-lg justify-center items-center mx-auto">
                 <img src={logo} alt="logo" width="100" height="100" />
-              </Link>
-            </div>
+                <h2 className="text-center items-center text-xl font-bold text-blue-900">
+                  ScholarStream
+                </h2>
+              </div>
+            </Link>
           </div>
 
           {/* Middle Content */}
@@ -59,11 +62,7 @@ const Sidebar = () => {
             {/*  Menu Items */}
             <nav>
               {/* Common Menu */}
-              {/* <MenuItem
-                icon={BsGraphUp}
-                label="Statistics"
-                address="/dashboard"
-              /> */}
+
               {/* Role-Based Menu */}
 
               <AdminRole></AdminRole>
@@ -76,11 +75,9 @@ const Sidebar = () => {
           <div>
             <hr />
 
-            {/* <MenuItem
-              icon={FcSettings}
-              label="Profile"
-              address="/profile"
-            /> */}
+            <Link to="/dashboard/profile">
+              <button className="btn w-full">Profile</button>
+            </Link>
             <button
               onClick={signoutUserFunc}
               className="flex cursor-pointer w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"

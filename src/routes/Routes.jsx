@@ -19,6 +19,7 @@ import Analytics from "../pages/Dashboard/Admin/Analytics";
 import Reviews from "../pages/Dashboard/Moderator/Reviews";
 import ManageApplications from "../pages/Dashboard/Moderator/ManageApplications";
 import MyApplications from "../pages/Dashboard/Student/MyApplications";
+import MyReviews from "../pages/Dashboard/Student/MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +131,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyApplications></MyApplications>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-reviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>
           </PrivateRoute>
         ),
       },

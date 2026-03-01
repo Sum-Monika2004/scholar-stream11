@@ -24,8 +24,6 @@ const ManageApplications = () => {
         body: JSON.stringify({ status }),
       },
     );
-
-    refetch();
   };
 
   const handleFeedback = async (id, feedback) => {
@@ -40,11 +38,7 @@ const ManageApplications = () => {
         body: JSON.stringify({ feedback }),
       },
     );
-
-    refetch();
   };
-
-  console.log(app);
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -56,7 +50,6 @@ const ManageApplications = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>Name</th>
                 <th>Email</th>
                 <th>University</th>
                 <th>Feedback</th>
@@ -69,7 +62,6 @@ const ManageApplications = () => {
             <tbody>
               {app.map((a) => (
                 <tr key={a._id}>
-                  <td>{a.applicantName}</td>
                   <td>{a.applicantEmail}</td>
                   <td>{a.universityName}</td>
                   <td>{a.applicationFeedback || "—"}</td>
@@ -99,8 +91,9 @@ const ManageApplications = () => {
                           Cancel
                         </button>
                       </div>
+
                       {/* Status Update */}
-                      <div className="mt-2">
+                      <div className="ml-2">
                         <select
                           className="select select-sm"
                           onChange={(e) =>

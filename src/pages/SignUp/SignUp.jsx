@@ -27,19 +27,39 @@ const SignUp = () => {
 
     const regExp = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{6,}).*$/;
 
-    console.log(regExp.test(password));
-
     if (!regExp.test(password)) {
       toast.error(
         "Password must be at least 6 characters, including capital letter and special character",
       );
       return;
     }
+
     // 1. create user
     createUserWithEmailAndPasswordFunc(email, password)
       .then((res) => {
         // 2. update Profile
-        updateProfileFunc(displayName, photoURL)
+        updateProfileFunc(displayName, photoURL);
+        ///////////////////////////
+
+        const user = res.user;
+        setUser(user);
+        const token = user.getIdToken();
+
+        const userInfo = {
+          name: displayName,
+          email: email,
+          photoURL: photoURL,
+        };
+        console.log(userInfo);
+
+        fetch("https://scholar-stream-server-gules.vercel.app/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(userInfo),
+        })
           .then(() => {
             setLoading(false);
             navigate("/");

@@ -29,6 +29,8 @@ const Reviews = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
+
             const remaining = reviews.filter((s) => s._id !== id);
             setReviews(remaining);
 

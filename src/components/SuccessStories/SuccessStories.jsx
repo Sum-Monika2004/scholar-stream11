@@ -28,7 +28,7 @@ const SuccessStories = () => {
       <div className="w-11/12 mx-auto my-20 ">
         <h2 className="font-bold text-right text-5xl my-15">Success Stories</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 dark:text-blue-950">
           {stories.map((story, index) => (
             <div key={index} className="card shadow-xl bg-white">
               <div className="card-body">

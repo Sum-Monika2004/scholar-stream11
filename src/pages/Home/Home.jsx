@@ -10,7 +10,7 @@ const Home = () => {
   const data = useLoaderData();
 
   return (
-    <div className="">
+    <div>
       {/* hero sec */}
       <section
         className="relative h-100 flex items-center justify-center bg-cover bg-center bg-no-repeat text-white overflow-hidden"
@@ -63,9 +63,9 @@ const Home = () => {
       <SuccessStories></SuccessStories>
 
       {/* FAQ  */}
-      <section className="w-11/12 mx-auto my-20">
+      <section className="w-11/12 mx-auto my-20 ">
         <h2 className="font-bold text-5xl my-15">Frequently Asked Questions</h2>
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4 dark:text-blue-950">
           <div className="space-y-4">
             {/* FAQ Item 1 */}
             <div className="collapse collapse-arrow bg-white shadow-sm">

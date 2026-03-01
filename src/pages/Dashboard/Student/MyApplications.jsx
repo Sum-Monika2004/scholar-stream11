@@ -15,8 +15,6 @@ const MyApplications = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user?.email) return;
-
     fetch(
       `https://scholar-stream-server-gules.vercel.app/my-applications/${user.email}`,
       {
@@ -26,7 +24,7 @@ const MyApplications = () => {
       },
     )
       .then((res) => res.json())
-      .then((data) => setApplications(data));
+      .then((data) => setApplications(data.result));
   }, [user]);
 
   const handleDelete = async (id) => {

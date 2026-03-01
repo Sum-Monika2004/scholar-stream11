@@ -1,5 +1,5 @@
 nav a.active {
   text-decoration: underline;
-  font-weight: bolder;
+  font-weight: bold;
   color: hsl(0, 0%, 100%);
 }

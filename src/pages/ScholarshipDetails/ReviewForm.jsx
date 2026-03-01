@@ -52,7 +52,7 @@ const ReviewForm = ({ scholarshipId, singleS, onAddReview }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-10 border border-gray-100 shadow-md p-6 rounded-lg bg-white"
+      className="mt-10 border border-gray-100 shadow-md p-6 rounded-lg bg-white dark:bg-[#29334b]"
     >
       <h4 className="text-xl font-semibold mb-4">Write a Review</h4>
 
@@ -60,7 +60,7 @@ const ReviewForm = ({ scholarshipId, singleS, onAddReview }) => {
       <select
         value={rating}
         onChange={(e) => setRating(e.target.value)}
-        className="rounded p-2 w-full mb-4 border border-gray-200"
+        className="rounded p-2 w-full mb-4 border border-gray-200 dark:bg-black"
       >
         {[5, 4, 3, 2, 1].map((r) => (
           <option key={r} value={r}>
@@ -79,7 +79,7 @@ const ReviewForm = ({ scholarshipId, singleS, onAddReview }) => {
         rows="4"
       />
 
-      <button className="bg-blue-900 hover:bg-blue-800 text-white px-5 py-2 rounded cursor-pointer">
+      <button className="bg-blue-900 hover:bg-blue-800 text-white px-5 py-2 rounded cursor-pointera dark:bg-blue-500">
         Submit Review
       </button>
     </form>

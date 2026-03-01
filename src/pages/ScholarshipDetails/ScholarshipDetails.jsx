@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { AuthContext } from "../../providers/AuthContext";
 import ReviewsSection from "./ReviewsSection";
 
@@ -8,7 +8,6 @@ const ScholarshipDetails = () => {
   const [reviews, setReviews] = useState([]);
 
   const { user } = use(AuthContext);
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const addNewReview = (newReview) => {
@@ -38,21 +37,21 @@ const ScholarshipDetails = () => {
 
   return (
     <div className="max-w-11/12 mx-auto p-4 md:p-6 lg:p-8">
-      <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden p-5">
+      <div className="card bg-base-100 shadow-xl dark:border-gray-600 border border-gray-200 rounded-2xl overflow-hidden p-5 ">
         <div className="flex flex-col md:flex-row gap-8 p-6  ">
           {/* image and text  */}
           <div className="p-8 flex-row md:flex gap-4 items-center w-full">
             {/* image  */}
-            <div className="shrink-0 w-full flex-1">
+            <div className="shrink-0 w-full flex-1 ">
               <img
                 className=" w-full object-cover rounded-xl shadow-md"
                 src={singleS.universityImage}
               />
             </div>
             {/* text  */}
-            <div className="ml-8 justify-center space-y-4 flex-1">
-              <p className="text-[20px] font-bold mt-6 text-center md:text-left w-full ">
-                <span className=" text-3xl md:text-4xl font-bold text-gray-800 text-nowrap ">
+            <div className="ml-8 justify-center space-y-4 flex-1 ">
+              <p className="text-[20px] font-bold mt-6 text-center md:text-left w-full text-gray-800 dark:text-white">
+                <span className=" text-3xl md:text-4xl font-bold  text-nowrap ">
                   {" "}
                   {singleS.universityName}
                 </span>
@@ -105,37 +104,33 @@ const ScholarshipDetails = () => {
                 </div>
               </div>
               <div>
-                <p className="">
+                <p>
                   Tuition Fees:{" "}
-                  <span className="font-semibold text-gray-500">
+                  <span className="font-semibold text-gray-500 dark:text-white">
                     $ {singleS.tuitionFees}
                   </span>
                 </p>
-                <p className="">
+                <p>
                   Application Fees:{" "}
-                  <span className="font-semibold text-gray-500">
+                  <span className="font-semibold text-gray-500 dark:text-white">
                     $ {singleS.applicationFees}
                   </span>
                 </p>
-                <p className="">
+                <p>
                   Service Charges:{" "}
-                  <span className="font-semibold text-gray-500">
+                  <span className="font-semibold text-gray-500 dark:text-white">
                     $ {singleS.serviceCharge}
                   </span>
                 </p>
               </div>
-              <div className="text-gray-400 font-semibold flex-row md:flex justify-between items-center">
+              <div className=" font-semibold flex-row md:flex justify-between items-center">
                 <p>
-                  Post Date:{" "}
-                  <span className="text-black">
-                    {singleS.scholarshipPostDate}
-                  </span>
+                  <span className="text-gray-400">Post Date: </span>
+                  {singleS.scholarshipPostDate}
                 </p>
-                <p className="text-red-600">
-                  Deadline:{" "}
-                  <span className="text-black">
-                    {singleS.applicationDeadline}
-                  </span>
+                <p>
+                  <span className="text-red-600">Deadline: </span>
+                  {singleS.applicationDeadline}
                 </p>
               </div>
               <div>
@@ -148,7 +143,7 @@ const ScholarshipDetails = () => {
         {/* apply button  */}
         <div>
           <Link to={`/payment/${singleS._id}`}>
-            <button className="btn w-full rounded-full bg-blue-950 text-white hover:opacity-85">
+            <button className="btn w-full rounded-full dark:bg-blue-500 bg-blue-950 text-white hover:opacity-85">
               Apply for Scholarship
             </button>
           </Link>

@@ -30,7 +30,7 @@ const Footer = () => {
           </nav>
         </nav>
       </footer>
-      <footer className="footer sm:footer-horizontal footer-center bg-gray-300  p-4">
+      <footer className="footer sm:footer-horizontal footer-center bg-gray-300 dark:text-blue-950 p-4">
         <aside>
           <p>
             © {new Date().getFullYear()} - Scholar-Stream. All rights reserved.

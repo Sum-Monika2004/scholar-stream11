@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import successImg from "../../assets/success.png";
 import { toast } from "react-toastify";
 
@@ -7,19 +7,16 @@ const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const location = useLocation();
-  const navigate = useNavigate();
   const [s, setS] = useState({});
 
   useEffect(() => {
-    {
-      fetch(
-        `https://scholar-stream-server-gules.vercel.app/payment-success/${sessionId}`,
-      )
-        .then((res) => res.json())
-        .then((result) => {
-          setS(result);
-        });
-    }
+    fetch(
+      `https://scholar-stream-server-gules.vercel.app/payment-success/${sessionId}`,
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setS(result);
+      });
   }, [sessionId]);
 
   useEffect(() => {
@@ -34,7 +31,7 @@ const PaymentSuccess = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          toast("Application saved:", data);
+          toast("Application saved", data);
         });
     }
   }, []);

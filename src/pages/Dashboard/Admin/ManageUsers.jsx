@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState, use } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { AuthContext } from "../../../providers/AuthContext";
 import Swal from "sweetalert2";
 
@@ -35,40 +35,40 @@ const ManageUsers = () => {
   // };
 
   const handleDelete = (id) => {
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: "You won't be able to revert this!",
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    fetch(`https://scholar-stream-server-gules.vercel.app/users/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://scholar-stream-server-gules.vercel.app/users/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            const remaining = users.filter((s) => s._id !== id);
+            setUsers(remaining);
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your user has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     });
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   console.log(data);
-
-    const remaining = users.filter((s) => s._id !== id);
-    setUsers(remaining);
-
-    //   Swal.fire({
-    //     title: "Deleted!",
-    //     text: "Your user has been deleted.",
-    //     icon: "success",
-    //   });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
-    //   }
-    // });
   };
 
   useEffect(() => {

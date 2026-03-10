@@ -50,6 +50,8 @@ const AddSch = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+
         toast.success("Scholarship added successfully");
         navigate("/all-scholarships");
       })

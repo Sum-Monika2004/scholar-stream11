@@ -1,14 +1,14 @@
 import React from "react";
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { DotLoader } from "react-spinners";
 import Swal from "sweetalert2";
 
 const ManageSch = () => {
   const [scholarships, setScholarships] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://scholar-stream-server-gules.vercel.app/all-scholarships")
@@ -41,6 +41,8 @@ const ManageSch = () => {
         )
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
+
             const remaining = scholarships.filter((s) => s._id !== id);
             setScholarships(remaining);
 

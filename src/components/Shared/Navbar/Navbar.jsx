@@ -80,7 +80,7 @@ const Navbar = () => {
           <NavLink to="/">
             <div className="btn btn-ghost text-xl">
               <img className="h-10 w-10" src={logoImg} alt="" />
-              <span className=" text-blue-900 text-2xl font-bold dark:text-white">
+              <span className=" text-blue-900 hidden md:block text-2xl font-bold dark:text-white">
                 ScholarStream
               </span>
             </div>
